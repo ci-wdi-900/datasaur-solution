@@ -4,7 +4,9 @@ const {
   truncateSpecies,
   makeExtinct,
   isCarnivore,
+  isHerbivore,
   isExtinct,
+  isNotExtinct,
   isTriassic,
   isJurassic,
   isCretaceous,
@@ -249,6 +251,27 @@ describe('isCarnivore', () => {
   })
 })
 
+describe('isHerbivore', () => {
+  it(`returns whether the given dinosaur is a herbivore`, () => {
+    const dino1 = {
+      species: 'T-Rex',
+      period: 'Cretaceous',
+      carnivore: true,
+      extinct: true
+    };
+
+    const dino2 = {
+      species: 'Brachiosaurus',
+      period: 'Jurassic',
+      carnivore: false,
+      extinct: false
+    };
+
+    expect(isHerbivore(dino1)).toBe(false);
+    expect(isHerbivore(dino2)).toBe(true)
+  })
+})
+
 describe('isExtinct', () => {
   it(`returns whether the given dinosaur is extinct`, () => {
     const dino1 = {
@@ -267,6 +290,27 @@ describe('isExtinct', () => {
 
     expect(isExtinct(dino1)).toBe(true)
     expect(isExtinct(dino2)).toBe(false);
+  })
+})
+
+describe('isNotExtinct', () => {
+  it(`returns whether the given dinosaur is NOT extinct`, () => {
+    const dino1 = {
+      species: 'T-Rex',
+      period: 'Cretaceous',
+      carnivore: true,
+      extinct: true
+    };
+
+    const dino2 = {
+      species: 'Brachiosaurus',
+      period: 'Jurassic',
+      carnivore: false,
+      extinct: false
+    };
+
+    expect(isNotExtinct(dino1)).toBe(false)
+    expect(isNotExtinct(dino2)).toBe(true);
   })
 })
 
@@ -604,7 +648,7 @@ describe('extinctOnly',() => {
 })
 
 describe('notExtinct',() => {
-  it(`returns an array of only extinct dinosaurs`, () => {
+  it(`returns an array of only NOT extinct dinosaurs`, () => {
     const stillAlive = [
       {
         species: 'Archaeopteryx',
