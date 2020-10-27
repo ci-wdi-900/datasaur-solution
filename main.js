@@ -32,20 +32,40 @@ const makeExtinct = function(dinosaur) {
 
   return newDino;
 
+  // or, more cleanly:
+  // return makeDino(dinosaur.species, dinosaur.period, dinosaur.carnivore, true);
+
 }
 
 const isCarnivore = function(dinosaur) {
-  return dinosaur.carnivore === true;
+  if (dinosaur.carnivore === true) {
+    return true;
+  } else {
+    return false;
+  }
 
-  // Or, more simply:
+  // or, more succinctly:
+  // return dinosaur.carnivore === true;
+
+  // or, even MORE succinctly:
 //   return dinosaur.carnivore
+}
+
+const isHerbivore = function(dinosaur) {
+  return dinosaur.carnivore === false;
+  // or, with a not:
+  // return !dinosaur.carnivore;
 }
 
 const isExtinct = function(dinosaur) {
   return dinosaur.extinct === true;
+}
 
-  // Or, more simply:
-  // return dinosaur.extinct
+const isNotExtinct = function(dinosaur) {
+  return dinosaur.extinct === false;
+
+  // or, with a not:
+  // return !dinosaur.extinct;
 }
 
 const isTriassic = function(dinosaur) {
@@ -61,40 +81,189 @@ const isCretaceous = function(dinosaur) {
 }
 
 const singularizeDinos = function(dinos) {
-  return dinos.map(makeSingular);
+  const newDinos = [];
+  for (const dino of dinos) {
+    newDinos.push(makeSingular(dino));
+  }
+
+  return newDinos;
 }
 
 const truncateDinos = function(dinos) {
-  return dinos.map(truncateSpecies);
+  const newDinos = [];
+  for (const dino of dinos) {
+    newDinos.push(truncateSpecies(dino));
+  }
+
+  return newDinos;
 }
 
 const makeAllExtinct = function(dinos) {
-  return dinos.map(makeExtinct);
+  const newDinos = [];
+  for (const dino of dinos) {
+    newDinos.push(makeExtinct(dino));
+  }
+
+  return newDinos;
 }
 
 const carnivoresOnly = function(dinos) {
-  return dinos.filter(isCarnivore);
+  const newDinos = [];
+  for (const dino of dinos) {
+    if (isCarnivore(dino)) {
+      newDinos.push(dino);
+    }
+  }
+
+  return newDinos;
 }
 
 const herbivoresOnly = function(dinos) {
-  return dinos.filter((dino) => !isCarnivore(dino));
+  const newDinos = [];
+  for (const dino of dinos) {
+    if (isHerbivore(dino)) {
+      newDinos.push(dino);
+    }
+  }
+
+  return newDinos;
 }
 
 const extinctOnly = function(dinos) {
-  return dinos.filter(isExtinct);
+  const newDinos = [];
+  for (const dino of dinos) {
+    if (isExtinct(dino)) {
+      newDinos.push(dino);
+    }
+  }
+
+  return newDinos;
 }
 
 const notExtinct = function(dinos) {
-  return dinos.filter((dino) => !isExtinct(dino));
+  const newDinos = [];
+  for (const dino of dinos) {
+    if (isNotExtinct(dino)) {
+      newDinos.push(dino);
+    }
+  }
+
+  return newDinos;
 }
 
 const triassicOnly = function(dinos) {
-  return dinos.filter(isTriassic);
+  const newDinos = [];
+  for (const dino of dinos) {
+    if (isTriassic(dino)) {
+      newDinos.push(dino);
+    }
+  }
+
+  return newDinos;
 }
 
 const notTriassic = function(dinos) {
-  return dinos.filter((dino) => !isTriassic(dino))
+  const newDinos = [];
+  for (const dino of dinos) {
+    if (!isTriassic(dino)) {
+      newDinos.push(dino);
+    }
+  }
+
+    return newDinos;
 }
+
+
+
+
+
+
+
+
+
+/*********************************
+ * TEST SETUP CODE - DON'T TOUCH!*
+ ********************************/
+
+  if (typeof makeDino === 'undefined') {
+    makeDino = undefined
+  }
+
+  if (typeof makeSingular === 'undefined') {
+    makeSingular = undefined
+  }
+
+  if (typeof truncateSpecies === 'undefined') {
+    truncateSpecies = undefined
+  }
+
+  if (typeof makeExtinct === 'undefined') {
+    makeExtinct = undefined
+  }
+
+  if (typeof isCarnivore === 'undefined') {
+    isCarnivore = undefined
+  }
+
+  if (typeof isHerbivore === 'undefined') {
+    isHerbivore = undefined
+  }
+
+  if (typeof isExtinct === 'undefined') {
+    isExtinct = undefined
+  }
+
+  if (typeof isNotExtinct === 'undefined') {
+    isNotExtinct = undefined
+  }
+
+  if (typeof isTriassic === 'undefined') {
+    isTriassic = undefined
+  }
+
+  if (typeof isJurassic === 'undefined') {
+    isJurassic = undefined
+  }
+
+  if (typeof isCretaceous === 'undefined') {
+    isCretaceous = undefined
+  }
+
+  if (typeof singularizeDinos === 'undefined') {
+    singularizeDinos = undefined
+  }
+
+  if (typeof truncateDinos === 'undefined') {
+    truncateDinos = undefined
+  }
+
+  if (typeof makeAllExtinct === 'undefined') {
+    makeAllExtinct = undefined
+  }
+
+  if (typeof carnivoresOnly === 'undefined') {
+    carnivoresOnly = undefined
+  }
+
+  if (typeof herbivoresOnly === 'undefined') {
+    herbivoresOnly = undefined
+  }
+
+  if (typeof extinctOnly === 'undefined') {
+    extinctOnly = undefined
+  }
+
+  if (typeof notExtinct === 'undefined') {
+    notExtinct = undefined
+  }
+
+  if (typeof triassicOnly === 'undefined') {
+    triassicOnly = undefined
+  }
+
+  if (typeof notTriassic === 'undefined') {
+    notTriassic = undefined
+  }
 
 
 module.exports = {
@@ -103,7 +272,9 @@ module.exports = {
   truncateSpecies,
   makeExtinct,
   isCarnivore,
+  isHerbivore,
   isExtinct,
+  isNotExtinct,
   isTriassic,
   isJurassic,
   isCretaceous,
